@@ -4,7 +4,11 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/Index.vue') }
+      { path: '', component: () => import('pages/Index.vue') },
+      { path: '/words', component: () => import('pages/Words') },
+      { path: '/words/:id/edit', component: () => import('pages/Edit') },
+      { path: 'words/new', component: () => import('pages/CreateWord') },
+      { path: '/', redirect: '/words' }
     ]
   }
 ]
