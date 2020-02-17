@@ -1,5 +1,5 @@
 <template>
-  <q-page>
+  <q-page padding>
     <h3>Words</h3>
     <q-markup-table id="words">
       <template>
@@ -23,8 +23,12 @@
             <td width="75" class="center aligned">
               <router-link :to="`/words/${item._id}`">Show</router-link>
             </td>
-            <td width="75" class="center aligned"> Edit </td>
-            <td width="75" class="center aligned"> Destroy </td>
+            <td width="75" class="center aligned">
+              <router-link :to="`/words/${item._id}/edit`">Edit</router-link>
+            </td>
+            <td width="75" class="center aligned" @click="deleteWord(item._id)">
+              Delete
+            </td>
           </tr>
         </tbody>
       </template>
@@ -45,6 +49,11 @@ export default {
   },
   async mounted(){
     this.words = await api.getWords();
+  },
+  methods:{
+    deleteWord(id){
+      console.log(id)
+    }
   }
 }
 </script>

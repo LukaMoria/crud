@@ -1,5 +1,5 @@
 <template>
-  <div style="margin:0 30px">
+  <q-page padding>
     <h3>Show Word</h3>
 
     <div>
@@ -26,9 +26,9 @@
         Edit word
       </router-link>
     </div>
-  </div>
-  </div>
-  </div>
+    </div>
+    </div>
+  </q-page>
 </template>
 
 <script>
