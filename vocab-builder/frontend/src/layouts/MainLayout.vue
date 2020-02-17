@@ -3,28 +3,20 @@
 
     <q-header elevated class="header bg-secondary flex">
         <nav class="navigation flex items-center justify-center self-center">
-          <q-icon name="thumb_up"></q-icon>
-          <a href="" class="flex">
-            <picture>
-              <img src="" alt="Words">
-            </picture>
+          <router-link to="/" class="flex justify-center items-center" >
+            <q-icon name="mode_comment"></q-icon>
             <span>Words</span>
-          </a>
-          <a href="" class="flex">
-            <picture>
-              <img src="" alt="New word">
-            </picture>
+          </router-link>
+          <router-link to="/" class="flex justify-center items-center">
+            <q-icon name="add_circle"></q-icon>
             <span>New</span>
-          </a>
-          <a href="" class="flex">
-            <picture>
-              <img src="" alt="test">
-            </picture>
+          </router-link>
+          <router-link to="/" class="flex justify-center items-center">
+            <q-icon name="layers"></q-icon>
             <span>Test</span>
-          </a>
+          </router-link>
         </nav>
     </q-header>
-    <q-btn icon="thumbs_up" />
     <q-page-container>
       <router-view />
     </q-page-container>
@@ -53,5 +45,17 @@ export default {
   .navigation{
     height:100%;
     width:100%;
+    font-size:16px;
+  }
+
+</style>
+
+<style scoped>
+  a > * {
+    padding: 0 5px;
+  }
+  a{
+    text-decoration: none;
+    padding:10px;
   }
 </style>
