@@ -1,24 +1,33 @@
 <template>
-  <div>
-    <h1>Show Word</h1>
+  <div style="margin:0 30px">
+    <h3>Show Word</h3>
 
-    <div class="ui labeled input fluid">
-      <div class="ui label">
-        <i class="germany flag"></i> German
+    <div>
+      <div class="input-wrapper">
+       <q-input outlined :value="word" readonly>
+         <template v-slot:prepend>
+          <q-icon name="flag"></q-icon>
+          <span>Russian:</span>
+        </template>
+       </q-input>
       </div>
-      <input type="text" readonly  :value="word.german"/>
-    </div>
-    <div class="ui labeled input fluid">
-      <div class="ui label">
-        <i class="united kingdom flag"></i> English
+      <div class="input-wrapper">
+       <q-input outlined :value="word" readonly>
+         <template v-slot:prepend>
+          <q-icon name="flag"></q-icon>
+          <span>English:</span>
+        </template>
+       </q-input>
       </div>
-      <input type="text" readonly  :value="word.english"/>
-    </div>
+    <div>
+
     <div class="actions">
-      <router-link :to="{ name: 'edit', params: { id: this.$route.params.id }}">
+      <router-link :to="`/words/${this.$route.params.id}/edit`">
         Edit word
       </router-link>
     </div>
+  </div>
+  </div>
   </div>
 </template>
 
@@ -29,19 +38,14 @@ export default {
   name: 'show',
   data() {
     return {
-      word: ''
+      word: 'qweqweqeqwewq'
     };
-  },
-  async mounted() {
-    this.word = await api.getWord(this.$route.params.id);
   }
 };
 </script>
 
-<style scoped>
-.actions a {
-  display: block;
-  text-decoration: underline;
-  margin: 20px 10px;
-}
+<style>
+  .input-wrapper{
+    width:500px;
+  }
 </style>

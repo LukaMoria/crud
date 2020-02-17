@@ -21,7 +21,7 @@
             <td class="text-center"> {{ item['english'] }}</td>
             <td class="text-center"> {{ item['russian'] }}</td>
             <td width="75" class="center aligned">
-              <router-link :to="{name: 'Show', params: {id: item._id}}">Show</router-link>
+              <router-link :to="`/words/${item._id}`">Show</router-link>
             </td>
             <td width="75" class="center aligned"> Edit </td>
             <td width="75" class="center aligned"> Destroy </td>
@@ -40,7 +40,7 @@ export default {
   name: 'Words',
   data () {
     return {
-      words: [ { english:'Cap', russian: 'Чашка' } ]
+      words: [ { english:'Cap', russian: 'Чашка', '_id' :1 } ]
     }
   },
   async mounted(){

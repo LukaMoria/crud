@@ -8,6 +8,7 @@ const routes = [
       { path: '/words', component: () => import('pages/Words') },
       { path: '/words/:id/edit', component: () => import('pages/Edit') },
       { path: 'words/new', component: () => import('pages/CreateWord') },
+      { path: '/words/:id', component: () => import('pages/Show') },
       { path: '/', redirect: '/words' }
     ]
   }
