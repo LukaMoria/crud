@@ -7,9 +7,9 @@ const VocabSchema = new Schema({
         type: String,
         required: 'English word cannot be blank'
     },
-    german: {
+    russian: {
         type: String,
-        required: 'German word cannot be blank'
+        required: 'Russian word cannot be blank'
     },
 },
 { collection: 'vocab' }

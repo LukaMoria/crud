@@ -3,7 +3,7 @@
 
     <q-header elevated class="header bg-secondary flex">
         <nav class="navigation flex items-center justify-center self-center">
-          <router-link to="/" class="flex justify-center items-center" >
+          <router-link to="/words" class="flex justify-center items-center" >
             <q-icon name="mode_comment"></q-icon>
             <span>Words</span>
           </router-link>

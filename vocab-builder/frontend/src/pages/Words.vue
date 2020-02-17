@@ -1,26 +1,30 @@
 <template>
   <q-page>
-    <h1>Words</h1>
+    <h3>Words</h3>
     <q-markup-table id="words">
       <template>
         <thead>
           <tr>
+            <th>№</th>
             <th>English</th>
-            <th>German</th>
-            <th></th>
-            <th></th>
-            <th></th>
+            <th>Russia</th>
+            <th class="center aligned">1</th>
+            <th class="center aligned">2</th>
+            <th class="center aligned"> {{words.length}}</th>
           </tr>
         </thead>
       </template>
       <template>
         <tbody>
-          <tr v-for="(word,i) in words" :key="i">
-            <td class="text-left">{{words.english}}</td>
-            <td class="text-right">{{words.german}}</td>
-            <td width="75" class="center aligned">Show</td>
-            <td width="75" class="center aligned">Edit</td>
-            <td width="75" class="center aligned">Destroy</td>
+          <tr v-for="(item, index) in words" :key="index">
+            <td class="text-center">{{index+1}}</td>
+            <td class="text-center"> {{ item['english'] }}</td>
+            <td class="text-center"> {{ item['russian'] }}</td>
+            <td width="75" class="center aligned">
+              <router-link :to="{name: 'Show', params: {id: item._id}}">Show</router-link>
+            </td>
+            <td width="75" class="center aligned"> Edit </td>
+            <td width="75" class="center aligned"> Destroy </td>
           </tr>
         </tbody>
       </template>
@@ -36,7 +40,7 @@ export default {
   name: 'Words',
   data () {
     return {
-      words: []
+      words: [ { english:'Cap', russian: 'Чашка' } ]
     }
   },
   async mounted(){
