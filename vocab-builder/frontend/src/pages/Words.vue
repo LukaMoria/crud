@@ -1,16 +1,15 @@
 <template>
   <q-page padding>
     <h3>Words</h3>
-    <q-markup-table id="words">
+    <transition appear enter-active-class="animated slideInUp" v-if="words.length>0">
+      <q-markup-table id="words" style="animation-duration: .6s;">
       <template>
         <thead>
           <tr>
             <th>№</th>
             <th>English</th>
             <th>Russia</th>
-            <th class="center aligned">1</th>
-            <th class="center aligned">2</th>
-            <th class="center aligned"> {{words.length}}</th>
+            <th colspan="3">Actions {{words.length}}</th>
           </tr>
         </thead>
       </template>
@@ -23,37 +22,78 @@
             <td width="75" class="center aligned">
               <router-link :to="`/words/${item._id}`">Show</router-link>
             </td>
-            <td width="75" class="center aligned">
-              <router-link :to="`/words/${item._id}/edit`">Edit</router-link>
+            <td width="75" class="text-center aligned" @click="openingModal(item['_id'])">
+              <q-icon name="edit" class="link"></q-icon>
             </td>
-            <td width="75" class="center aligned" @click="deleteWord(item._id)">
-              Delete
+            <td width="75" class="text-center aligned">
+              <router-link :to="'/'">
+                <q-icon name="delete_forever"></q-icon>
+              </router-link>
             </td>
           </tr>
         </tbody>
       </template>
     </q-markup-table>
+    </transition>
+    <edit-dialog
+      :currentEditableWord="currentEditableWord"
+      :openEditDialog="openEdit"
+      @close-popup="closePopup"
+      @update-word="updateWord"
+    />
   </q-page>
 </template>
 
 <script>
 
 import { api } from '../helpers/helpers.js'
+import { baseUrl } from '../helpers/consts.js'
+import EditDialog from '../components/editDialog.vue'
+import { Notify } from 'quasar'
 
 export default {
   name: 'Words',
   data () {
     return {
-      words: [ { english:'Cap', russian: 'Чашка', '_id' :1 } ]
+      words: [],
+      openEdit:false,
+      currentEditableWord:{},
     }
   },
-  async mounted(){
-    this.words = await api.getWords();
+  components:{
+    EditDialog
   },
   methods:{
-    deleteWord(id){
-      console.log(id)
+    openingModal(id){
+      this.currentEditableWord = this.words.find(obj => obj._id === id)
+      this.openEdit = true
+    },
+    closePopup(payload){
+      this.openEdit = false
+    },
+    updateWord(payload){
+      console.log(payload)
+      this.$axios.put(`${baseUrl+payload._id}`, payload)
+        .then((res) => {
+          this.$q.notify({position:'top-right', message:`Word ${payload.english} has been updated`})
+        })
+      const ind = this.words.findIndex(obj => obj._id === payload._id)
+      console.log(ind)
+      this.words.splice(ind, 1, payload)
+      this.openEdit = false
     }
+  },
+  async created(){
+    this.words = (await this.$axios.get(`${baseUrl}`)).data
   }
 }
 </script>
+
+<style>
+  .link{
+    cursor: pointer;
+  }
+  .link:hover{
+    color:green
+  }
+</style>

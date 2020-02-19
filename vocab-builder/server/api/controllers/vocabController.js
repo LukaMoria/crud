@@ -25,6 +25,8 @@ exports.read_a_word = (req, res) => {
 }
 
 exports.update_a_word = (req, res) => {
+    const {english, russian} = req.body
+    console.log(english)
     Vocab.findOneAndUpdate(
       { _id: req.params.wordId },
       req.body,
