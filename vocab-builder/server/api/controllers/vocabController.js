@@ -11,6 +11,7 @@ exports.list_all_words = (req, res) => {
 
 exports.create_a_word = (req, res) => {
     const newWord = new Vocab(req.body)
+    console.log(newWord)
     newWord.save((err, word) => {
         if (err) res.send(err);
         res.json(word)
@@ -25,8 +26,6 @@ exports.read_a_word = (req, res) => {
 }
 
 exports.update_a_word = (req, res) => {
-    const {english, russian} = req.body
-    console.log(english)
     Vocab.findOneAndUpdate(
       { _id: req.params.wordId },
       req.body,

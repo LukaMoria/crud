@@ -7,7 +7,7 @@
             <q-icon name="mode_comment"></q-icon>
             <span>Words</span>
           </router-link>
-          <router-link to="/" class="flex justify-center items-center">
+          <router-link to="/words/new" class="flex justify-center items-center">
             <q-icon name="add_circle"></q-icon>
             <span>New</span>
           </router-link>

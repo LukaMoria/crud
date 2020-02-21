@@ -2,36 +2,34 @@
   <q-page padding>
     <h3>Words</h3>
     <transition appear enter-active-class="animated slideInUp" v-if="words.length>0">
-      <q-markup-table id="words" style="animation-duration: .6s;">
+      <q-markup-table id="words" style="animation-duration: .4s;">
       <template>
         <thead>
           <tr>
             <th>№</th>
             <th>English</th>
-            <th>Russia</th>
+            <th>Russian</th>
             <th colspan="3">Actions {{words.length}}</th>
           </tr>
         </thead>
       </template>
       <template>
-        <tbody>
-          <tr v-for="(item, index) in words" :key="index">
-            <td class="text-center">{{index+1}}</td>
-            <td class="text-center"> {{ item['english'] }}</td>
-            <td class="text-center"> {{ item['russian'] }}</td>
-            <td width="75" class="center aligned">
-              <router-link :to="`/words/${item._id}`">Show</router-link>
-            </td>
-            <td width="75" class="text-center aligned" @click="openingModal(item['_id'])">
-              <q-icon name="edit" class="link"></q-icon>
-            </td>
-            <td width="75" class="text-center aligned">
-              <router-link :to="'/'">
+          <transition-group  tag="tbody" leave-to-class="animated slideOutLeft">
+            <tr v-for="(item, index) in words" :key="item['_id']">
+              <td class="text-center">{{index+1}}</td>
+              <td class="text-center"> {{ item['english'] }}</td>
+              <td class="text-center"> {{ item['russian'] }}</td>
+              <td width="75" class="center aligned">
+                <router-link :to="`/words/${item._id}`">Show</router-link>
+              </td>
+              <td width="75" class="text-center aligned" @click="openingModal(item['_id'])">
+                <q-icon name="edit" class="link"></q-icon>
+              </td>
+              <td width="75" class="text-center aligned" @click="deleteItem(item['_id'])">
                 <q-icon name="delete_forever"></q-icon>
-              </router-link>
-            </td>
-          </tr>
-        </tbody>
+              </td>
+            </tr>
+          </transition-group>
       </template>
     </q-markup-table>
     </transition>
@@ -81,6 +79,17 @@ export default {
       console.log(ind)
       this.words.splice(ind, 1, payload)
       this.openEdit = false
+    },
+    deleteItem(id){
+      this.$axios.delete(`${baseUrl}${id}`)
+        .then(res => this.$q.notify({
+          position:'top-right',
+          color:'red',
+          message:'Word has been deleted'
+        }))
+      const index = this.words.findIndex(elem => elem._id === id)
+      console.log(index)
+      this.words.splice(index, 1)
     }
   },
   async created(){
