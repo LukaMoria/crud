@@ -32,3 +32,6 @@ yarn-error.log*
 *.ntvs*
 *.njsproj
 *.sln
+
+.test/jest/coverage
+.test/jest/utils

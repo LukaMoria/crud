@@ -14,8 +14,8 @@
         </q-card-section>
 
         <q-card-actions align="right" class="text-primary">
-          <q-btn flat label="Отмена" @click="cancel"></q-btn>
-          <q-btn flat label="Сохранить" @click="save"></q-btn>
+          <q-btn flat id="cancel" label="Отмена" @click="cancel"></q-btn>
+          <q-btn flat id="save" ref="myBtn" label="Сохранить" @click="save"></q-btn>
         </q-card-actions>
       </q-card>
     </q-dialog>
