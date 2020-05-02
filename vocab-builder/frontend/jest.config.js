@@ -14,10 +14,8 @@ module.exports = {
   coverageDirectory: '<rootDir>/test/jest/coverage',
   collectCoverageFrom: [
     '<rootDir>/src/**/*.vue',
-    '<rootDir>/src/**/*.js',
-    '<rootDir>/src/**/*.ts',
-    '<rootDir>/src/**/*.jsx'
   ],
+  coverageReporters: ["html", "text-summary"],
   coverageThreshold: {
     global: {
     //  branches: 50,
@@ -29,7 +27,6 @@ module.exports = {
   testMatch: [
     '<rootDir>/test/jest/__tests__/**/*.spec.js',
     '<rootDir>/test/jest/__tests__/**/*.test.js',
-    '<rootDir>/src/**/__tests__/*_jest.spec.js'
   ],
   moduleFileExtensions: [
     'vue',
@@ -49,11 +46,9 @@ module.exports = {
   },
   transform: {
     '.*\\.vue$': 'vue-jest',
-    '.*\\.js$': 'babel-jest',
     '.+\\.(css|styl|less|sass|scss|svg|png|jpg|ttf|woff|woff2)$': 'jest-transform-stub',
     // use these if NPM is being flaky
     // '.*\\.vue$': '<rootDir>/node_modules/@quasar/quasar-app-extension-testing-unit-jest/node_modules/vue-jest',
-    // '.*\\.js$': '<rootDir>/node_modules/@quasar/quasar-app-extension-testing-unit-jest/node_modules/babel-jest'
   },
   transformIgnorePatterns: [
     '<rootDir>/node_modules/(?!quasar/lang)'

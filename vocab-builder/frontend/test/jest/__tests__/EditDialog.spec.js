@@ -1,10 +1,9 @@
 
 import { mount, createLocalVue, createWrapper, shallowMount } from '@vue/test-utils'
 import editDialog from '../../../src/components/editDialog.vue'
-import Words from '../../../src/pages/Words.vue'
 import * as All from 'quasar'
 // import langEn from 'quasar/lang/en-us' // change to any language you wish! => this breaks wallaby :(
-const { Quasar  } = All
+const { Quasar } = All
 
 const components = Object.keys(All).reduce((object, key) => {
   const val = All[key]
@@ -15,13 +14,14 @@ const components = Object.keys(All).reduce((object, key) => {
 }, {})
 
 describe('editDialog.spec.js', () => {
+
     const localVue = createLocalVue()
     //Инициализация локального экземпляра Vue
     localVue.use(Quasar, { components }) 
 
-    const createCmp = propsData => mount(editDialog, { localVue, propsData });
+    const createCmp = propsData => shallowMount(editDialog, { localVue, propsData });
 
-    describe('Properties', () => {
+    describe('Editable word params', () => {
         it('Checks identity editable word', () => {
             const cmp = createCmp({
                 openEditDialog:true,
@@ -33,8 +33,8 @@ describe('editDialog.spec.js', () => {
             expect(cmp.props('currentEditableWord').russian).toBe('Дом')
             expect(cmp.props('currentEditableWord').english).toBe('House')
         })
-    
-        it('Checks shapshot', () => {
+
+        it('Checks identity of prop and local Editable Word Russian', () => {
             const cmp = createCmp({
                 openEditDialog:true,
                 currentEditableWord:{
@@ -42,14 +42,10 @@ describe('editDialog.spec.js', () => {
                     english: 'House'
                 }
             })
-            expect(cmp.element).toMatchSnapshot();
+            expect(cmp.vm.currentEditableWord.russian).toBe(cmp.props('currentEditableWord').russian)
         })
-    })
 
-    describe('Events', () => {
-        
-
-        it('handles click on save button', () => {
+        it('Checks identity of prop and localWord English', () => {
             const cmp = createCmp({
                 openEditDialog:true,
                 currentEditableWord:{
@@ -57,18 +53,47 @@ describe('editDialog.spec.js', () => {
                     english: 'House'
                 }
             })
-
-            const bodyWrapper = createWrapper(document.body)
-            const spy = spyOn(cmp.vm, "save");
-            console.log(bodyWrapper.html())
-            console.log(bodyWrapper.find('.q-dialog'))
-            const w = document.querySelector('.q-dialog')
-            const t = createWrapper(w.__vue__)
-            console.log(t.html())
-            const el = t.find('#save').trigger("click");
-            expect(cmp.vm.save).toBeCalled();
+            expect(cmp.vm.currentEditableWord.english).toBe(cmp.props('currentEditableWord').english)
         })
 
+        it('has a button save', () => {
+            const cmp = createCmp({
+                openEditDialog:true,
+                currentEditableWord:{
+                    russian: 'Дом',
+                    english: 'House'
+                }
+            })
+            expect(cmp.contains('#save')).toBe(true)
+        })
+
+        it('has a button cancel', () => {
+            const cmp = createCmp({
+                openEditDialog:true,
+                currentEditableWord:{
+                    russian: 'Дом',
+                    english: 'House'
+                }
+            })
+            expect(cmp.contains('#cancel')).toBe(true)
+        })
+
+        it('have a snapshot', () => {
+            const div = document.createElement('div')
+            document.body.appendChild(div)
+            const cmp = mount(editDialog, {
+                localVue,
+                propsData:{
+                    openEditDialog:true,
+                    currentEditableWord:{
+                        russian: 'Дом',
+                        english: 'House'
+                    }
+                },
+                attachTo: div,
+            })
+
+            expect(cmp.html()).toMatchSnapshot()
+        })
     })
-    
 })

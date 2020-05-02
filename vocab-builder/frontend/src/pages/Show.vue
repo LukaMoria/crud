@@ -26,14 +26,9 @@
 </template>
 
 <script>
-import { api } from '../helpers/helpers';
-import EditDialog from '../components/editDialog.vue'
 
 export default {
-  name: 'show',
-  components:{
-    EditDialog
-  },
+  name: 'ShowWord',
   data() {
     return {
       word: ''
