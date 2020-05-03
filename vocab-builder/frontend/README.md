@@ -1,6 +1,6 @@
-# Quasar App (frontend)
+# Quasar App (frontend) && Express && MongoDb && Vue-test-utils && JEST
 
-vocabular
+vocabulary
 
 ## Install the dependencies
 ```bash
