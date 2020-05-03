@@ -9,6 +9,9 @@ import * as All from 'quasar'
 import Show from '../../../src/pages/Show.vue'
 const { Quasar } = All
 
+
+jest.useFakeTimers()
+
 const components = Object.keys(All).reduce((object, key) => {
   const val = All[key]
   if (val && val.component && val.component.name != null) {
@@ -25,8 +28,19 @@ describe('Mount Show page', () => {
   })
   const vm = wrapper.vm
 
+  it('invoke create hook', () => {
+    const createdHook = jest.spyOn(Show, 'created')
+    const wrapper = shallowMount(Show)
+    jest.advanceTimersByTime('5000')
+    expect(createdHook).toHaveBeenCalled()
+  })
+
   it('passes the sanity check and creates a wrapper', () => {
     expect(wrapper.isVueInstance()).toBe(true)
+  })
+
+  it('checks that word is empty', () => {
+    expect(vm.word).toBe('')
   })
 
   it('check data option', async () => {
@@ -44,4 +58,5 @@ describe('Mount Show page', () => {
     const q = await renderToString(Show)
     expect(q).toContain('q-page')
   })
+
 })

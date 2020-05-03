@@ -45,7 +45,7 @@
 <script>
 
 import { api } from '../helpers/helpers.js'
-import { baseUrl } from '../helpers/consts.js'
+import  baseUrl  from '../helpers/consts.js'
 import EditDialog from '../components/editDialog.vue'
 import { Notify } from 'quasar'
 
