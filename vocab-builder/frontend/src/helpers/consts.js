@@ -1,1 +1,1 @@
-export const baseUrl = 'http://localhost:3000/words/'
+export default 'http://localhost:3000/words/'

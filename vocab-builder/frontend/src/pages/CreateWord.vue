@@ -27,8 +27,6 @@
 
 <script>
 
-import { baseUrl } from '../helpers/consts.js'
-
 export default {
   name:'ShowWord',
   data () {
@@ -36,12 +34,13 @@ export default {
       word: {
         english: '',
         russian: ''
-      }
+      },
+      baseUrl: 'http://localhost:3000/words/'
     }
   },
   methods:{
     async createWord(){
-      const word = (await this.$axios.post(baseUrl, this.word))
+      const word = (await this.$axios.post(this.baseUrl, this.word))
       if (word) this.$q.notify({message:'Success!'})
     }
   }

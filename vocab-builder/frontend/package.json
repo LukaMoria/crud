@@ -17,7 +17,18 @@
     "vue-i18n": "^8.0.0"
   },
   "devDependencies": {
-    "@quasar/app": "^1.0.0"
+    "@babel/core": "^7.9.6",
+    "@babel/plugin-transform-modules-commonjs": "^7.9.6",
+    "@babel/preset-env": "^7.9.6",
+    "@quasar/app": "^1.0.0",
+    "@quasar/quasar-app-extension-testing": "^1.0.0",
+    "@quasar/quasar-app-extension-testing-unit-jest": "^1.0.0",
+    "@vue/server-test-utils": "^1.0.0-beta.33",
+    "babel-jest": "^25.5.1",
+    "babel-plugin-transform-default-import": "^1.0.0",
+    "babel-plugin-transform-es2015-modules-commonjs": "^6.26.2",
+    "jest-vue-preprocessor": "^1.7.1",
+    "vue-jest": "^3.0.5"
   },
   "engines": {
     "node": ">= 10.18.1",
