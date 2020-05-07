@@ -70,13 +70,17 @@ export default {
       this.openEdit = false
     },
     updateWord(payload){
-      console.log(payload)
       this.$axios.put(`${baseUrl+payload._id}`, payload)
         .then((res) => {
-          this.$q.notify({position:'top-right', message:`Word ${payload.english} has been updated`})
+          this.$q.notify(
+            { 
+              position:'top-right', message:`Word ${payload.english} has been updated`
+            }
+          )
         })
+        .catch(err => console.log(err))
+
       const ind = this.words.findIndex(obj => obj._id === payload._id)
-      console.log(ind)
       this.words.splice(ind, 1, payload)
       this.openEdit = false
     },
@@ -86,9 +90,11 @@ export default {
           position:'top-right',
           color:'red',
           message:'Word has been deleted'
-        }))
+          })
+        )
+        .catch(err => console.log(err))
+
       const index = this.words.findIndex(elem => elem._id === id)
-      console.log(index)
       this.words.splice(index, 1)
     }
   },
