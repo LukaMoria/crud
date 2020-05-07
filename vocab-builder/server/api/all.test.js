@@ -73,8 +73,10 @@ describe("Test the root path", () => {
       .set('Accept', 'application/json')
       .expect('Content-Type', /json/)
       .expect(200)
-    
-    done();
+      .end((err, res) => {
+        if (err) return done(err);
+        done();
+      });
   });
   
   
