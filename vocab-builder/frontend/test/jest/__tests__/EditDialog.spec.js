@@ -21,7 +21,7 @@ describe('editDialog.spec.js', () => {
 
     const createCmp = propsData => shallowMount(editDialog, { localVue, propsData });
 
-    describe('Editable word params', () => {
+    describe('checking identity of params', () => {
         it('Checks identity editable word', () => {
             const cmp = createCmp({
                 openEditDialog:true,
@@ -34,7 +34,7 @@ describe('editDialog.spec.js', () => {
             expect(cmp.props('currentEditableWord').english).toBe('House')
         })
 
-        it('Checks identity of prop and local Editable Word Russian', () => {
+        it('Checks identity of prop and local editable Russian word', () => {
             const cmp = createCmp({
                 openEditDialog:true,
                 currentEditableWord:{
@@ -45,7 +45,7 @@ describe('editDialog.spec.js', () => {
             expect(cmp.vm.currentEditableWord.russian).toBe(cmp.props('currentEditableWord').russian)
         })
 
-        it('Checks identity of prop and localWord English', () => {
+        it('Checks identity of prop and local editable english word', () => {
             const cmp = createCmp({
                 openEditDialog:true,
                 currentEditableWord:{
@@ -56,7 +56,7 @@ describe('editDialog.spec.js', () => {
             expect(cmp.vm.currentEditableWord.english).toBe(cmp.props('currentEditableWord').english)
         })
 
-        it('has a button save', () => {
+        it('checking existing btn save in layout', () => {
             const cmp = createCmp({
                 openEditDialog:true,
                 currentEditableWord:{
@@ -67,7 +67,7 @@ describe('editDialog.spec.js', () => {
             expect(cmp.contains('#save')).toBe(true)
         })
 
-        it('has a button cancel', () => {
+        it('checking existing btn cancel in layout', () => {
             const cmp = createCmp({
                 openEditDialog:true,
                 currentEditableWord:{
@@ -78,7 +78,7 @@ describe('editDialog.spec.js', () => {
             expect(cmp.contains('#cancel')).toBe(true)
         })
 
-        it('have a snapshot', () => {
+        it('create snapshot', () => {
             const div = document.createElement('div')
             document.body.appendChild(div)
             const cmp = mount(editDialog, {

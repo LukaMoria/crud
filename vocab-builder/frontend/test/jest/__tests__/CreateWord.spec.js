@@ -23,7 +23,7 @@ describe('Create Word page', () => {
     })
     const createCmp = propsData => shallowMount(CreateWord, { localVue, propsData });
 
-    it('set propsData', () => {
+    it('createSnapshot', () => {
         const cmp = createCmp()
         cmp.setData({
             word: {
@@ -34,7 +34,7 @@ describe('Create Word page', () => {
         expect(cmp.html()).toMatchSnapshot()
     })
 
-    it('async request by click', done => {
+    it('async request by click checking type of word', done => {
         const wrapper = shallowMount(CreateWord, {localVue})
         wrapper.find('.glossy').trigger('click')
         wrapper.vm.$nextTick(() => {
@@ -43,7 +43,7 @@ describe('Create Word page', () => {
         })
     })
 
-    it('set propsData', () => {
+    it('check identity of data', () => {
         const cmp = createCmp()
         cmp.setData({
             word: {

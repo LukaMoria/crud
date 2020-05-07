@@ -32,7 +32,7 @@ describe('MainLayout specs', () => {
         expect(wrapper.contains('router-link[to="/words"]')).toBe(true)
     })
 
-    it('checks link for cteating word', () => {
+    it('checks link for creating word', () => {
         expect(wrapper.contains('router-link[to="/words/new"]')).toBe(true)
     })
 
