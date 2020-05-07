@@ -10,8 +10,8 @@ describe("Test the root path", () => {
     connection = await MongoClient.connect('mongodb://localhost:27017', {
       useNewUrlParser: true,
     });
-	
-	console.log('Connection successful');
+  
+    console.log('Connection successful');
     db = await connection.db('vocab-builder');
   });
 
@@ -19,9 +19,10 @@ describe("Test the root path", () => {
     await connection.close();
     await db.close();
   });
+
 	beforeEach(async () => {
-		
-	//await db.collection('vocab').deleteMany({});
+		//don't clean db before tests
+	  //await db.collection('vocab').deleteMany({});
   });
   
 
@@ -39,23 +40,20 @@ describe("Test the root path", () => {
   test("Delete with status 200", done => {
     request(app)
       .delete('/words/128')
-	  .expect('Content-Type', /json/)
-	  .set('Accept', 'application/json')
-	  .expect(200)
-      .then(response => {
-	  expect(response.body.name.toLowerCase()).toContain('error')
-	  .err((err,res)=>{ done();});
-      })	  
+      .expect(200)	  
+      .end((err, res) => {
+        if (err) return done(err)
+        done();
+      })
   });
   
   test("Delete with error", done => {
     request(app)
       .delete('/words/130')
-	  .expect('Content-Type', /json/)
-	  .set('Accept', 'application/json')
-	  .then(response => {
-	  expect(response.body.name.toLowerCase()).toContain('error')
-  	  .err((err,res)=>{ done();});
+      .expect(200)
+	    .then(response => {
+        expect(response.body.name.toLowerCase()).toContain('error')
+        done()
       })
   });  
   
@@ -68,18 +66,16 @@ describe("Test the root path", () => {
       });
   });
   
-    test("It should response the POST method create_a_word", done => {
+  test("It should response the POST method create_a_word", done => {
     request(app)
       .post("/words")
-	  .send({_id: '132', russian: 'спина', english: 'book'})
-	  .set('Accept', 'application/json')
-	  .expect('Content-Type', /json/)
-	  .expect(200)
-
-		
-//		const response = await ;
-       done();
-      });
+      .send({_id: '132', russian: 'спина', english: 'book'})
+      .set('Accept', 'application/json')
+      .expect('Content-Type', /json/)
+      .expect(200)
+    
+    done();
+  });
   
   
   test("It should response the GET method", done => {
@@ -90,7 +86,5 @@ describe("Test the root path", () => {
         done();
       });
   });
-  
-  
-  
+
 });
